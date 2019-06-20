@@ -10,7 +10,8 @@ export default class SearchBar extends Component {
       spotifyApi.setAccessToken(this.props.getAccessToken())
     }
     this.state = {
-      artistName: ''
+      artistName: '',
+      artistResults: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,11 +23,32 @@ export default class SearchBar extends Component {
     })
   }
 
+  generateArtistPlaylist() {}
+
+  artistSearchQuery() {
+    spotifyApi.searchArtists(this.state.artistName).then(res => {
+      console.log(res)
+      let list = res.artists.items.reduce((acc, artist) => {
+        // console.log('artist.images[0]:   ', artist.images[0].url)
+        let reducedArtist = {
+          id: artist.id,
+          name: artist.name,
+          imgUrl: artist.images[0],
+          externalUrl: artist.external_urls.spotify
+        }
+        acc.push(reducedArtist)
+        return acc
+      }, [])
+      list = list.slice(0, 10)
+      this.setState({
+        artistResults: list
+      })
+    })
+  }
+
   handleSubmit(event) {
     event.preventDefault()
-    spotifyApi
-      .searchArtists(this.state.artistName)
-      .then(res => console.log(res))
+    this.artistSearchQuery()
   }
 
   render() {
@@ -36,15 +58,33 @@ export default class SearchBar extends Component {
           <input
             type="text"
             name="artistName"
-            placeholder="Search artist..."
+            placeholder="Search artists..."
             value={this.state.artistName}
             onChange={this.handleChange}
           />
-          <button type="submit" onClick={this.handleSubmit}>
-            {' '}
-            Search
-          </button>
+          {this.state.artistName ? (
+            <button type="submit" onClick={this.handleSubmit}>
+              Search
+            </button>
+          ) : null}
         </form>
+        {this.state.artistResults.map(artist => (
+          <div key={artist.id}>
+            {artist.imgUrl ? (
+              <img
+                src={artist.imgUrl.url}
+                style={{width: '100px', height: '100px'}}
+              />
+            ) : (
+              <img
+                src="https://static.makeuseof.com/wp-content/uploads/2016/06/discover-new-music-spotify-670x335.jpg"
+                style={{width: '100px', height: '100px', overflow: 'hidden'}}
+              />
+            )}
+            <h3>{artist.name}</h3>
+            <button>Generate Playlist</button>
+          </div>
+        ))}
       </div>
     )
   }

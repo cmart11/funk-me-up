@@ -20,7 +20,8 @@ export class UserHome extends React.Component {
       isLoggedIn: !!token,
       name: '',
       nowPlaying: {},
-      playlistName: []
+      playlistName: [],
+      check: false
     }
   }
 
@@ -55,6 +56,7 @@ export class UserHome extends React.Component {
   }
 
   getNowPlaying() {
+    this.setState({check: true})
     spotifyApi.getMyCurrentPlaybackState().then(res => {
       this.setState({
         nowPlaying: {
@@ -72,17 +74,20 @@ export class UserHome extends React.Component {
         {this.state.isLoggedIn ? (
           <div>
             <h3>Welcome, {this.state.name}</h3>
-            <div>
-              <h3>Now Playing:</h3>
-              <h4>{this.state.nowPlaying.name}</h4>
-              <img
-                src={this.state.nowPlaying.albumArt}
-                style={{width: '200px', height: '200px'}}
-              />
-            </div>
+            {this.state.check ? (
+              <div>
+                <h3>Now Playing:</h3>
+                <h4>{this.state.nowPlaying.name}</h4>
+                <img
+                  src={this.state.nowPlaying.albumArt}
+                  style={{width: '200px', height: '200px'}}
+                />
+              </div>
+            ) : null}
             <button onClick={() => this.getNowPlaying()} type="submit">
               Check current song!
             </button>
+            <SearchBar getAccessToken={this.getAccessToken} />
             <h3>My Playlists</h3>
             {this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)}
           </div>
@@ -92,7 +97,6 @@ export class UserHome extends React.Component {
             <h4>No Playlists</h4>
           </div>
         )}
-        <SearchBar getAccessToken={this.getAccessToken} />
       </div>
     )
   }
