@@ -4,22 +4,57 @@ import {connect} from 'react-redux'
 import SearchBar from './SearchBar'
 import LoginButton from './LoginButton'
 import {Login} from './auth-form'
+import queryString from 'query-string'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
+export class UserHome extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      playlistName: []
+    }
+  }
 
-  return (
-    <div>
-      <h1>Title</h1>
+  componentDidMount() {
+    let parsed = queryString.parse(window.location.search)
+    let accessToken = parsed.access_token
 
-      <LoginButton />
-      <h3>Welcome, {email}</h3>
-      <SearchBar />
-    </div>
-  )
+    fetch('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    })
+      .then(res => res.json())
+      .then(data => this.setState({name: data.display_name}))
+
+    fetch('https://api.spotify.com/v1/me/playlists', {
+      headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    })
+      .then(res => res.json())
+      .then(data =>
+        this.setState({playlistName: data.items.map(item => item.name)})
+      )
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Title</h1>
+
+        <LoginButton />
+        <h3>Welcome, {this.state.name}</h3>
+
+        {this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)}
+
+        <SearchBar />
+      </div>
+    )
+  }
 }
 
 /**
