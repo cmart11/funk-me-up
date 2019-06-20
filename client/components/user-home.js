@@ -41,16 +41,25 @@ export class UserHome extends React.Component {
       )
   }
 
+  handleSubmit(event) {
+    event.preventDefault()
+  }
+
   render() {
     return (
       <div>
         <h1>Title</h1>
 
         <LoginButton />
-        <h3>Welcome, {this.state.name}</h3>
-
-        {this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)}
-
+        {this.state.name ? <h3>Welcome, {this.state.name}</h3> : null}
+        <div>
+          <h3>My Playlists</h3>
+          {this.state.playlistName ? (
+            this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)
+          ) : (
+            <h4>No Playlists</h4>
+          )}
+        </div>
         <SearchBar />
       </div>
     )
