@@ -41,6 +41,7 @@ export default class SearchBar extends Component {
             onChange={this.handleChange}
           />
           <button type="submit" onClick={this.handleSubmit}>
+            {' '}
             Search
           </button>
         </form>
