@@ -13,7 +13,6 @@ export class UserHome extends React.Component {
   constructor(props) {
     super(props)
     const token = this.getAccessToken()
-    console.log('TOKEN', token)
     if (token) {
       spotifyApi.setAccessToken(token)
     }
@@ -66,10 +65,6 @@ export class UserHome extends React.Component {
     })
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
-  }
-
   render() {
     return (
       <div>
@@ -97,7 +92,7 @@ export class UserHome extends React.Component {
             <h4>No Playlists</h4>
           </div>
         )}
-        <SearchBar />
+        <SearchBar getAccessToken={this.getAccessToken} />
       </div>
     )
   }
