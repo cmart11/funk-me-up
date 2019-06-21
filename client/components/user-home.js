@@ -65,7 +65,6 @@ export class UserHome extends React.Component {
           this.setState({playlistName: data.items.map(item => item.name)})
         )
     }
-    this.getNowPlaying()
   }
 
   getNowPlaying() {
