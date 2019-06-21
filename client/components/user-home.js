@@ -30,6 +30,7 @@ export class UserHome extends React.Component {
     this.generateSingleArtistPlaylist = this.generateSingleArtistPlaylist.bind(
       this
     )
+    this.createNewPlaylist = this.createNewPlaylist.bind(this)
   }
 
   getAccessToken() {
@@ -68,7 +69,6 @@ export class UserHome extends React.Component {
   getNowPlaying() {
     this.setState({check: true})
     spotifyApi.getMyCurrentPlaybackState().then(res => {
-      console.log('NOWPLAYING OBJ:  ', res)
       this.setState({
         nowPlaying: {
           artistId: res.item.artists[0].id,
@@ -103,8 +103,13 @@ export class UserHome extends React.Component {
       .then(trackIds => spotifyApi.getTracks(trackIds))
       .then(data => {
         this.setState({playlistTracks: data.tracks})
-        console.log('this.state.playlistTracks:    ', this.state.playlistTracks)
       })
+  }
+
+  createNewPlaylist(userId, playlistName = 'my new p-list') {
+    spotifyApi
+      .createPlaylist(userId, {name: playlistName})
+      .then(data => console.log('created playlist: ', data))
   }
 
   render() {
@@ -113,7 +118,7 @@ export class UserHome extends React.Component {
         <h1>Title</h1>
         {this.state.isLoggedIn ? (
           <div>
-            <h3>Welcome, {this.state.name}</h3>
+            <h3>Hey, {this.state.name}!</h3>
             {this.state.check ? (
               <div>
                 <h3>Now Playing:</h3>
@@ -151,7 +156,11 @@ export class UserHome extends React.Component {
           </div>
         )}
         {this.state.playlistTracks.length ? (
-          <SongViewList tracks={this.state.playlistTracks} />
+          <SongViewList
+            tracks={this.state.playlistTracks}
+            createPlaylist={this.createNewPlaylist}
+            userId={this.state.userId}
+          />
         ) : null}
       </div>
     )
