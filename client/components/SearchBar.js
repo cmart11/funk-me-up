@@ -11,7 +11,8 @@ export default class SearchBar extends Component {
     }
     this.state = {
       artistName: '',
-      artistResults: []
+      artistResults: [],
+      playlistTracks: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -23,14 +24,10 @@ export default class SearchBar extends Component {
     })
   }
 
-  generateArtistPlaylist() {}
-
   artistSearchQuery() {
     spotifyApi.searchArtists(this.state.artistName).then(res => {
-      console.log(res)
       let list = res.artists.items.reduce((acc, artist) => {
-        // console.log('artist.images[0]:   ', artist.images[0].url)
-        let reducedArtist = {
+        const reducedArtist = {
           id: artist.id,
           name: artist.name,
           imgUrl: artist.images[0],
@@ -82,7 +79,12 @@ export default class SearchBar extends Component {
               />
             )}
             <h3>{artist.name}</h3>
-            <button>Generate Playlist</button>
+            <button
+              type="submit"
+              onClick={() => this.props.generateArtistPlaylist(artist.id)}
+            >
+              Generate Playlist
+            </button>
           </div>
         ))}
       </div>
