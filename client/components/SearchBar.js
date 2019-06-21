@@ -36,7 +36,7 @@ export default class SearchBar extends Component {
         acc.push(reducedArtist)
         return acc
       }, [])
-      list = list.slice(0, 10)
+      list = list.slice(0, 5)
       this.setState({
         artistResults: list
       })
