@@ -81,7 +81,7 @@ export default class SearchBar extends Component {
             <h3>{artist.name}</h3>
             <button
               type="submit"
-              onClick={() => this.props.generateArtistPlaylist(artist.id)}
+              onClick={() => this.props.generateSingleArtistPlaylist(artist.id)}
             >
               Generate Playlist
             </button>
