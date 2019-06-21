@@ -26,11 +26,13 @@ export class UserHome extends React.Component {
       playlistName: [],
       check: false,
       playlistTracks: []
+      // newPlaylist: {}
     }
     this.generateSingleArtistPlaylist = this.generateSingleArtistPlaylist.bind(
       this
     )
     this.createNewPlaylist = this.createNewPlaylist.bind(this)
+    this.addTracksToPlaylist = this.addTracksToPlaylist.bind(this)
   }
 
   getAccessToken() {
@@ -104,12 +106,24 @@ export class UserHome extends React.Component {
       .then(data => {
         this.setState({playlistTracks: data.tracks})
       })
+    // console.log('playlistTracks:    ', this.state.playlistTracks)
+    // spits out individual track info
   }
 
   createNewPlaylist(userId, playlistName = 'my new p-list') {
     spotifyApi
       .createPlaylist(userId, {name: playlistName})
-      .then(data => console.log('created playlist: ', data))
+      // .then(data => this.setState({ newPlaylist: data }))
+      .then(data => this.addTracksToPlaylist(data))
+    // console.log('newPlaylist', this.state.newPlaylist)
+  }
+
+  addTracksToPlaylist(newPlaylist) {
+    const {playlistTracks} = this.state
+    const id = newPlaylist.id
+    console.log('newPlaylist: ', newPlaylist)
+    const trackUris = playlistTracks.map(track => track.uri)
+    return spotifyApi.addTracksToPlaylist(id, trackUris)
   }
 
   render() {
