@@ -27,7 +27,9 @@ export class UserHome extends React.Component {
       check: false,
       playlistTracks: []
     }
-    this.generateArtistPlaylist = this.generateArtistPlaylist.bind(this)
+    this.generateSingleArtistPlaylist = this.generateSingleArtistPlaylist.bind(
+      this
+    )
   }
 
   getAccessToken() {
@@ -77,7 +79,7 @@ export class UserHome extends React.Component {
     })
   }
 
-  generateArtistPlaylist(artistId) {
+  generateSingleArtistPlaylist(artistId) {
     spotifyApi
       .getArtistAlbums(artistId, {limit: 10})
       .then(data => data.items.map(album => album.id))
@@ -123,7 +125,9 @@ export class UserHome extends React.Component {
                 <button
                   type="submit"
                   onClick={() =>
-                    this.generateArtistPlaylist(this.state.nowPlaying.artistId)
+                    this.generateSingleArtistPlaylist(
+                      this.state.nowPlaying.artistId
+                    )
                   }
                 >
                   Generate Playlist
@@ -135,7 +139,7 @@ export class UserHome extends React.Component {
             </button>
             <SearchBar
               getAccessToken={this.getAccessToken}
-              generateArtistPlaylist={this.generateArtistPlaylist}
+              generateSingleArtistPlaylist={this.generateSingleArtistPlaylist}
             />
             <h3>My Playlists</h3>
             {this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)}
