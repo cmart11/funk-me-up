@@ -115,15 +115,43 @@ export class UserHome extends React.Component {
       .createPlaylist(userId, {name: playlistName})
       // .then(data => this.setState({ newPlaylist: data }))
       .then(data => this.addTracksToPlaylist(data))
-    // console.log('newPlaylist', this.state.newPlaylist)
   }
 
   addTracksToPlaylist(newPlaylist) {
     const {playlistTracks} = this.state
     const id = newPlaylist.id
-    console.log('newPlaylist: ', newPlaylist)
     const trackUris = playlistTracks.map(track => track.uri)
     return spotifyApi.addTracksToPlaylist(id, trackUris)
+  }
+
+  // Returns track list of related artists
+  createRelatedArtistsPlaylist(artistId) {
+    spotifyApi
+      .getArtistRelatedArtists(artistId)
+      .then(res => res.artists.map(artist => artist.id).slice(0, 5))
+      .then(artistIds => {
+        return Promise.all([
+          spotifyApi.getArtistTopTracks(artistIds[0], 'US'),
+          spotifyApi.getArtistTopTracks(artistIds[1], 'US'),
+          spotifyApi.getArtistTopTracks(artistIds[2], 'US'),
+          spotifyApi.getArtistTopTracks(artistIds[3], 'US'),
+          spotifyApi.getArtistTopTracks(artistIds[4], 'US')
+        ])
+      })
+      .then(artistsTopTracks => {
+        return artistsTopTracks.reduce((acc, artistTracks) => {
+          for (let i = 0; i < 4; i++) {
+            let randomNum = Math.floor(
+              Math.random() * artistTracks.tracks.length
+            )
+            acc.push(artistTracks.tracks[randomNum])
+          }
+          return acc
+        }, [])
+      })
+      .then(data => {
+        this.setState({playlistTracks: data})
+      })
   }
 
   render() {
@@ -150,6 +178,16 @@ export class UserHome extends React.Component {
                   }
                 >
                   Generate Playlist
+                </button>
+                <button
+                  type="submit"
+                  onClick={() =>
+                    this.createRelatedArtistsPlaylist(
+                      this.state.nowPlaying.artistId
+                    )
+                  }
+                >
+                  Create Related Artists Playlist
                 </button>
               </div>
             ) : null}
