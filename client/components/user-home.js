@@ -70,13 +70,14 @@ export class UserHome extends React.Component {
   getNowPlaying() {
     this.setState({check: true})
     spotifyApi.getMyCurrentPlaybackState().then(res => {
-      this.setState({
-        nowPlaying: {
-          artistId: res.item.artists[0].id,
-          name: res.item.name,
-          albumArt: res.item.album.images[0].url
-        }
-      })
+      res &&
+        this.setState({
+          nowPlaying: {
+            artistId: res.item.artists[0].id,
+            name: res.item.name,
+            albumArt: res.item.album.images[0].url
+          }
+        })
     })
   }
 
