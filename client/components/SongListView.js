@@ -31,7 +31,8 @@ export default class SongListView extends React.Component {
 
   render() {
     const {tracks} = this.props
-    const trackIds = tracks.map(track => track.id)
+    // const trackIds = tracks.map(track => track.id)
+    // console.log('tracks', tracks)
 
     return (
       <div>
@@ -68,7 +69,13 @@ export default class SongListView extends React.Component {
                 <td>{track.album.name}</td>
                 <td>{track.album.release_date.slice(0, 4)}</td>
                 <td>
-                  <button type="submit">Remove</button>
+                  <a
+                    href={track.external_urls.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Listen on Spotify
+                  </a>
                 </td>
               </tr>
             ))}
