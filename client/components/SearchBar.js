@@ -60,7 +60,11 @@ export default class SearchBar extends Component {
             onChange={this.handleChange}
           />
           {this.state.artistName ? (
-            <button type="submit" onClick={this.handleSubmit}>
+            <button
+              type="submit"
+              onClick={this.handleSubmit}
+              className="search-bttn"
+            >
               Search
             </button>
           ) : null}

@@ -4,6 +4,7 @@ export default function LoginButton() {
   return (
     <div>
       <button
+        className="np-bttn"
         type="submit"
         onClick={() => {
           window.location = window.location.href.includes('localhost')

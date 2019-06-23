@@ -26,3 +26,51 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.np-bttn {
+  width: 180px;
+  height: 60px;
+  padding: 10px;
+  background-color: #2eddb7;
+  color: white;
+  border-radius: 1em;
+  border-style: none;
+  margin: 10px;
+  font-size: 0.9em;
+}
+
+.np-bttn:hover {
+  background-color: #27d1ac;
+  cursor: pointer;
+}
+
+.search-bttn {
+  width: 90px;
+  height: 40px;
+  padding: 10px;
+  background-color: #2eddb7;
+  color: white;
+  border-radius: 0.5em;
+  border-style: none;
+  margin-left: 5px;
+  font-size: 0.9em;
+}
+
+.search-bttn:hover {
+  background-color: #27d1ac;
+  cursor: pointer;
+}
+
+.np-container {
+  align-items: center;
+}
+
+input {
+  height: 30px;
+  width: 250px;
+  border-radius: 0.5em;
+  border-style: none;
+  padding: 10px;
+  font-size: 1em;
+  margin: 10px;
+}
