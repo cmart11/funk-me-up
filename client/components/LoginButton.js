@@ -8,7 +8,7 @@ export default function LoginButton() {
         onClick={() => {
           window.location = window.location.href.includes('localhost')
             ? 'http://localhost:8888/login'
-            : 'https://funkmeup-backend.herokuapp.com/login</div>'
+            : 'https://funkmeup-backend.herokuapp.com/login'
         }}
       >
         Login with Spotify
