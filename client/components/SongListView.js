@@ -32,6 +32,7 @@ export default class SongListView extends React.Component {
   render() {
     const {tracks} = this.props
     // const trackIds = tracks.map(track => track.id)
+    // console.log('tracks', tracks)
 
     return (
       <div>
