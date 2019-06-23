@@ -1,11 +1,16 @@
 body {
   font-family: sans-serif;
-  background-color: grey;
+  background-color: black;
   color: white;
 }
 
 a {
   text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: line-through;
 }
 
 label {

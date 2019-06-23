@@ -33,6 +33,7 @@ export class UserHome extends React.Component {
     )
     this.createNewPlaylist = this.createNewPlaylist.bind(this)
     this.addTracksToPlaylist = this.addTracksToPlaylist.bind(this)
+    this.getNowPlaying = this.getNowPlaying.bind(this)
   }
 
   getAccessToken() {
@@ -41,7 +42,7 @@ export class UserHome extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken = this.getAccessToken()
+    const accessToken = this.getAccessToken()
 
     if (accessToken) {
       this.getAccessToken()
@@ -55,27 +56,34 @@ export class UserHome extends React.Component {
           this.setState({name: data.display_name, userId: data.id})
         })
 
-      fetch('https://api.spotify.com/v1/me/playlists', {
-        headers: {
-          Authorization: 'Bearer ' + accessToken
-        }
-      })
-        .then(res => res.json())
-        .then(data =>
-          this.setState({playlistName: data.items.map(item => item.name)})
-        )
+      this.getUserPlaylist()
     }
+  }
+
+  getUserPlaylist() {
+    const accessToken = this.getAccessToken()
+    fetch('https://api.spotify.com/v1/me/playlists', {
+      headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    })
+      .then(res => res.json())
+      .then(data =>
+        this.setState({playlistName: data.items.map(item => item.name)})
+      )
   }
 
   getNowPlaying() {
     this.setState({check: true})
     spotifyApi.getMyCurrentPlaybackState().then(res => {
+      console.log('NP', res)
       res &&
         this.setState({
           nowPlaying: {
             artistId: res.item.artists[0].id,
             name: res.item.name,
-            albumArt: res.item.album.images[0].url
+            albumArt: res.item.album.images[0].url,
+            artistName: res.item.artists[0].name
           }
         })
     })
@@ -115,6 +123,7 @@ export class UserHome extends React.Component {
       .createPlaylist(userId, {name: playlistName})
       // .then(data => this.setState({ newPlaylist: data }))
       .then(data => this.addTracksToPlaylist(data))
+    this.getUserPlaylist()
   }
 
   addTracksToPlaylist(newPlaylist) {
@@ -160,7 +169,7 @@ export class UserHome extends React.Component {
         <h1>Title</h1>
         {this.state.isLoggedIn ? (
           <div>
-            <h3>Hey, {this.state.name}!</h3>
+            <h3>Hey, {this.state.name.split(' ')[0]}!</h3>
             {this.state.check ? (
               <div>
                 <h3>Now Playing:</h3>
@@ -177,7 +186,7 @@ export class UserHome extends React.Component {
                     )
                   }
                 >
-                  Generate Playlist
+                  Generate {this.state.nowPlaying.artistName} Playlist
                 </button>
                 <button
                   type="submit"
