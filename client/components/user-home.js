@@ -76,7 +76,6 @@ export class UserHome extends React.Component {
   getNowPlaying() {
     this.setState({check: true})
     spotifyApi.getMyCurrentPlaybackState().then(res => {
-      console.log('NP', res)
       res &&
         this.setState({
           nowPlaying: {
