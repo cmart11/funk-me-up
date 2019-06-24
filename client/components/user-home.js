@@ -165,54 +165,86 @@ export class UserHome extends React.Component {
   render() {
     return (
       <div>
-        <h1>Title</h1>
+        <div id="title-container">
+          <h1 id="funkmeup-title">Funk Me Up</h1>
+        </div>
         {this.state.isLoggedIn ? (
           <div>
-            <h3>Hey, {this.state.name.split(' ')[0]}!</h3>
-            {this.state.check ? (
-              <div>
-                <h3>Now Playing:</h3>
-                <h4>{this.state.nowPlaying.name}</h4>
-                <img
-                  src={this.state.nowPlaying.albumArt}
-                  style={{width: '200px', height: '200px'}}
-                />
-                <button
-                  type="submit"
-                  onClick={() =>
-                    this.generateSingleArtistPlaylist(
-                      this.state.nowPlaying.artistId
-                    )
-                  }
-                >
-                  Generate {this.state.nowPlaying.artistName} Playlist
-                </button>
-                <button
-                  type="submit"
-                  onClick={() =>
-                    this.createRelatedArtistsPlaylist(
-                      this.state.nowPlaying.artistId
-                    )
-                  }
-                >
-                  Create Related Artists Playlist
-                </button>
-              </div>
-            ) : null}
-            <button onClick={() => this.getNowPlaying()} type="submit">
-              Check current song!
-            </button>
+            <div id="home-top">
+              <h3>Hey, {this.state.name.split(' ')[0]}!</h3>
+              {this.state.check ? (
+                <div>
+                  <h3 id="np-header">Now Playing: </h3>
+                  <div
+                    className="np-container"
+                    style={{display: 'flex', width: '700px'}}
+                  >
+                    <img
+                      src={this.state.nowPlaying.albumArt}
+                      style={{
+                        width: '250px',
+                        height: '250px',
+                        marginRight: '1rem'
+                      }}
+                    />
+                    <div>
+                      <h4
+                        style={{
+                          marginLeft: '15px',
+                          marginBottom: '0px',
+                          fontSize: '2rem'
+                        }}
+                      >
+                        {this.state.nowPlaying.name}
+                      </h4>
+                      <p style={{marginLeft: '15px'}}>
+                        by {this.state.nowPlaying.artistName}
+                      </p>
+                      <button
+                        type="submit"
+                        onClick={() =>
+                          this.generateSingleArtistPlaylist(
+                            this.state.nowPlaying.artistId
+                          )
+                        }
+                        className="np-bttn"
+                      >
+                        Create {this.state.nowPlaying.artistName} Playlist
+                      </button>
+                      <button
+                        type="submit"
+                        onClick={() =>
+                          this.createRelatedArtistsPlaylist(
+                            this.state.nowPlaying.artistId
+                          )
+                        }
+                        className="np-bttn"
+                      >
+                        Create Playlist from Related Artists
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+              <button
+                onClick={() => this.getNowPlaying()}
+                type="submit"
+                className="np-bttn"
+              >
+                Find Now Playing
+              </button>
+            </div>
+            <hr />
             <SearchBar
               getAccessToken={this.getAccessToken}
               generateSingleArtistPlaylist={this.generateSingleArtistPlaylist}
             />
-            <h3>My Playlists</h3>
-            {this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)}
+            {/* <h3>My Playlists</h3>
+            {this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)} */}
           </div>
         ) : (
           <div>
             <LoginButton />
-            <h4>No Playlists</h4>
           </div>
         )}
         {this.state.playlistTracks.length ? (
