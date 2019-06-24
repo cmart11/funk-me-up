@@ -223,6 +223,13 @@ td {
   margin: 0 auto;
 }
 
+.login-div h4 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 200;
+  line-height: 1.5em;
+}
+
 .logbttn {
   font-size: 1.3rem;
 }
