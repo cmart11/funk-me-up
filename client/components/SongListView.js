@@ -36,51 +36,61 @@ export default class SongListView extends React.Component {
 
     return (
       <div>
-        <button onClick={this.toggle} type="submit">
-          toggle
-        </button>
-        {this.state.toggle && (
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              name="playlistName"
-              placeholder="playlist name..."
-              value={this.state.playlistName}
-              onChange={this.handleChange}
-            />
-            <button type="submit">Add to my Spotify playlists</button>
-          </form>
-        )}
-        <table style={{border: '1px white solid'}}>
-          <thead>
-            <tr>
-              <th>Artist</th>
-              <th>Track</th>
-              <th>Album</th>
-              <th>Release Year</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {tracks.map((track, index) => (
-              <tr key={track.id + index}>
-                <td>{track.artists[0].name}</td>
-                <td>{track.name}</td>
-                <td>{track.album.name}</td>
-                <td>{track.album.release_date.slice(0, 4)}</td>
-                <td>
-                  <a
-                    href={track.external_urls.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Listen on Spotify
-                  </a>
-                </td>
+        <hr />
+        <div className="add-pl-container">
+          <button onClick={this.toggle} type="submit" className="toggle-add">
+            Create Playlist?
+          </button>
+          {this.state.toggle && (
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                name="playlistName"
+                placeholder="playlist name..."
+                value={this.state.playlistName}
+                onChange={this.handleChange}
+              />
+              <button type="submit" className="toggle-add">
+                Add to Spotify
+              </button>
+            </form>
+          )}
+        </div>
+        <div id="playlist-container">
+          <table id="playlist-table">
+            <thead>
+              <tr>
+                <th>Artist</th>
+                <th>Track</th>
+                <th>Album</th>
+                <th className="release-year">Year</th>
+                <th />
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {tracks.map((track, index) => (
+                <tr key={track.id + index}>
+                  <td>{track.artists[0].name}</td>
+                  <td>{track.name}</td>
+                  <td>{track.album.name}</td>
+                  <td className="release-year">
+                    {track.album.release_date.slice(0, 4)}
+                  </td>
+                  <td>
+                    <a
+                      href={track.external_urls.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="listen-link"
+                    >
+                      Listen on Spotify
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }

@@ -51,7 +51,7 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div>
-        <form>
+        <form id="search-bar">
           <input
             type="text"
             name="artistName"
@@ -69,28 +69,46 @@ export default class SearchBar extends Component {
             </button>
           ) : null}
         </form>
-        {this.state.artistResults.map(artist => (
-          <div key={artist.id}>
-            {artist.imgUrl ? (
-              <img
-                src={artist.imgUrl.url}
-                style={{width: '100px', height: '100px'}}
-              />
-            ) : (
-              <img
-                src="https://static.makeuseof.com/wp-content/uploads/2016/06/discover-new-music-spotify-670x335.jpg"
-                style={{width: '100px', height: '100px', overflow: 'hidden'}}
-              />
-            )}
-            <h3>{artist.name}</h3>
-            <button
-              type="submit"
-              onClick={() => this.props.generateSingleArtistPlaylist(artist.id)}
-            >
-              Generate Playlist
-            </button>
-          </div>
-        ))}
+        <div id="results">
+          {this.state.artistResults.map(artist => (
+            <div key={artist.id} className="artist-result">
+              {artist.imgUrl ? (
+                <img
+                  src={artist.imgUrl.url}
+                  style={{
+                    width: '180px',
+                    height: '180px',
+                    borderTopLeftRadius: '0.5em',
+                    borderBottomLeftRadius: '0.5em'
+                  }}
+                />
+              ) : (
+                <img
+                  src="https://static.makeuseof.com/wp-content/uploads/2016/06/discover-new-music-spotify-670x335.jpg"
+                  style={{
+                    width: '180px',
+                    height: '180px',
+                    overflow: 'hidden',
+                    borderTopLeftRadius: '0.5em',
+                    borderBottomLeftRadius: '0.5em'
+                  }}
+                />
+              )}
+              <div className="search-artist-info">
+                <h3>{artist.name}</h3>
+                <button
+                  type="submit"
+                  onClick={() =>
+                    this.props.generateSingleArtistPlaylist(artist.id)
+                  }
+                  className="result-pl-bttn"
+                >
+                  Generate Playlist
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }

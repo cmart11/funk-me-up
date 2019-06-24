@@ -17,6 +17,13 @@ label {
   display: block;
 }
 
+hr {
+  border-width: 1px;
+  border-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
@@ -25,6 +32,11 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#home-top {
+  width: 900px;
+  margin: 0 auto;
 }
 
 .np-bttn {
@@ -42,6 +54,12 @@ form div {
 .np-bttn:hover {
   background-color: #27d1ac;
   cursor: pointer;
+}
+
+#search-bar {
+  width: 400px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .search-bttn {
@@ -73,4 +91,108 @@ input {
   padding: 10px;
   font-size: 1em;
   margin: 10px;
+}
+
+.artist-result {
+  display: flex;
+  width: 400px;
+  height: 180px;
+  border: 2px #2eddb7 solid;
+  border-radius: 0.5em;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.search-artist-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.result-pl-bttn {
+  width: 120px;
+  height: 40px;
+  padding: 5px;
+  background-color: #2eddb7;
+  color: white;
+  border-radius: 0.5em;
+  border-style: none;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.result-pl-bttn:hover {
+  background-color: #27d1ac;
+  cursor: pointer;
+}
+
+#results {
+  width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.toggle-add {
+  width: 120px;
+  height: 40px;
+  padding: 5px;
+  background-color: #2eddb7;
+  color: white;
+  border-radius: 0.5em;
+  border-style: none;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.toggle-add:hover {
+  background-color: #27d1ac;
+  cursor: pointer;
+}
+
+.add-pl-container {
+  width: 500px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#playlist-container {
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+#playlist-table {
+  width: 90vw;
+  border: 2px #2eddb7 solid;
+  border-radius: 0.5em;
+  padding: 5px;
+}
+
+th {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  border-bottom: 0.5px white solid;
+}
+
+td {
+  text-align: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.release-year {
+  text-align: center;
+  width: 100px;
+}
+
+.listen-link {
+  text-align: center;
+  color: #2eddb7;
+  font-weight: 100;
 }
