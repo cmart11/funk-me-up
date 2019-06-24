@@ -200,28 +200,32 @@ export class UserHome extends React.Component {
                       <p style={{marginLeft: '15px'}}>
                         by {this.state.nowPlaying.artistName}
                       </p>
-                      <button
-                        type="submit"
-                        onClick={() =>
-                          this.generateSingleArtistPlaylist(
-                            this.state.nowPlaying.artistId
-                          )
-                        }
-                        className="np-bttn"
+                      <div
+                        style={{display: 'flex', justifyContent: 'flex-start'}}
                       >
-                        Create {this.state.nowPlaying.artistName} Playlist
-                      </button>
-                      <button
-                        type="submit"
-                        onClick={() =>
-                          this.createRelatedArtistsPlaylist(
-                            this.state.nowPlaying.artistId
-                          )
-                        }
-                        className="np-bttn"
-                      >
-                        Create Playlist from Related Artists
-                      </button>
+                        <button
+                          type="submit"
+                          onClick={() =>
+                            this.generateSingleArtistPlaylist(
+                              this.state.nowPlaying.artistId
+                            )
+                          }
+                          className="np-bttn"
+                        >
+                          Create {this.state.nowPlaying.artistName} Playlist
+                        </button>
+                        <button
+                          type="submit"
+                          onClick={() =>
+                            this.createRelatedArtistsPlaylist(
+                              this.state.nowPlaying.artistId
+                            )
+                          }
+                          className="np-bttn"
+                        >
+                          Create Playlist from Related Artists
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
