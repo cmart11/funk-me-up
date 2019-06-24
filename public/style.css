@@ -217,3 +217,12 @@ td {
 #np-header {
   font-size: 1.8em;
 }
+
+.login-div {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.logbttn {
+  font-size: 1.3rem;
+}
