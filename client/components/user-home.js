@@ -165,14 +165,16 @@ export class UserHome extends React.Component {
   render() {
     return (
       <div>
-        <h1>Funk Me Up</h1>
+        <div id="title-container">
+          <h1 id="funkmeup-title">Funk Me Up</h1>
+        </div>
         {this.state.isLoggedIn ? (
           <div>
             <div id="home-top">
               <h3>Hey, {this.state.name.split(' ')[0]}!</h3>
               {this.state.check ? (
                 <div>
-                  <h3>Now Playing: </h3>
+                  <h3 id="np-header">Now Playing: </h3>
                   <div
                     className="np-container"
                     style={{display: 'flex', width: '700px'}}
@@ -207,7 +209,7 @@ export class UserHome extends React.Component {
                         }
                         className="np-bttn"
                       >
-                        Generate {this.state.nowPlaying.artistName} Playlist
+                        Create {this.state.nowPlaying.artistName} Playlist
                       </button>
                       <button
                         type="submit"

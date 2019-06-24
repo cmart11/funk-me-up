@@ -176,8 +176,10 @@ input {
 
 th {
   font-size: 1.2em;
-  margin-bottom: 20px;
   border-bottom: 0.5px white solid;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  padding-top: 8px;
 }
 
 td {
@@ -195,4 +197,23 @@ td {
   text-align: center;
   color: #2eddb7;
   font-weight: 100;
+}
+
+#funkmeup-title {
+  font-family: 'Rubik Mono One', sans-serif;
+  font-weight: 300;
+  font-size: 3.5rem;
+}
+
+#funkmeup-title:hover {
+  text-decoration: line-through;
+}
+
+#title-container {
+  width: 500px;
+  margin: 0 auto;
+}
+
+#np-header {
+  font-size: 1.8em;
 }
