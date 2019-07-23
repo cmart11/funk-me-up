@@ -228,11 +228,13 @@ td {
 
 #intro {
   text-align: center;
-  line-height: 1.8em;
+  line-height: 1.5em;
   margin-bottom: 50px;
   font-size: 3em;
 }
 
 .logbttn {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  width: 300px;
+  font-weight: 500;
 }
