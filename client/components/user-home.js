@@ -247,9 +247,7 @@ export class UserHome extends React.Component {
             {this.state.playlistName.map(name => <h3 key={name}>{name}</h3>)} */}
           </div>
         ) : (
-          <div>
-            <LoginButton />
-          </div>
+          <LoginButton />
         )}
         {this.state.playlistTracks.length ? (
           <SongViewList
