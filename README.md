@@ -2,4 +2,6 @@
 
 A React.js web app to start creating playlists based on the music you're currently listening.
 
-[![https://funkmeup.herokuapp.com/](https://funkmeup.herokuapp.com/)
+Visit us at: [https://funkmeup.herokuapp.com/](https://funkmeup.herokuapp.com/)
+
+![Funk Me Up](/images/fmu-screen-1.png)
