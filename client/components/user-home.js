@@ -1,9 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
 import SearchBar from './SearchBar'
 import LoginButton from './LoginButton'
-import {Login} from './auth-form'
 import SongViewList from './SongListView'
 
 import queryString from 'query-string'
@@ -11,7 +8,7 @@ import SpotifyWebApi from 'spotify-web-api-js'
 
 const spotifyApi = new SpotifyWebApi()
 
-export class UserHome extends React.Component {
+export default class UserHome extends React.Component {
   constructor(props) {
     super(props)
     const token = this.getAccessToken()
@@ -259,22 +256,4 @@ export class UserHome extends React.Component {
       </div>
     )
   }
-}
-
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    email: state.user.email
-  }
-}
-
-export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
 }
